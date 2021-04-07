@@ -19,25 +19,26 @@ const config = {
 	strictSSL: false,
 	secureOptions: secureOpt
 };
-const mainPath = core.getImput('mainPath');
+const mainPath = core.getInput('mainPath');
 const srcFolder = core.getInput('srcFolder');
 const targetFolder = core.getInput('targetFolder')
 async function deploy() {
-    const client = new ftp.Client();
-    client.ftp.verbose = true;
-    try {		
-        await client.access(config);
+	const client = new ftp.Client();
+	client.ftp.verbose = true;
+	try {
+		await client.access(config);
 		await client.cd(mainPath)
 		// await client.pwd()
-		await client.ensureDir(srcFolder)
+		await client.ensureDir(targetFolder)
 		await client.clearWorkingDir()
-		await client.uploadFromDir(targetFolder)
-    }
-    catch(err) {
-        console.log(err)
-    }
-    client.close()
+		await client.uploadFromDir(srcFolder)
+	}
+	catch(err) {
+		console.log(err)
+	}
+	client.close()
 }
+
 deploy();
 
 /***/ }),
