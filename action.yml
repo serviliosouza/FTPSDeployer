@@ -1,0 +1,20 @@
+name: 'FTPS Deployer'
+color: 'green'
+icon: 'upload'
+description: 'Upload files to server via FTPS (FTP with explicit TLS/SSL)'
+inputs:
+  host:
+    required: true
+  username:
+    required: true
+  password:
+    required: true
+  mainPath:
+    required: true
+  srcFolder:
+    required: true
+  targetFolder:
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
